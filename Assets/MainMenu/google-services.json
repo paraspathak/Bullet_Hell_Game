@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "315786592822",
+    "firebase_url": "https://bullet-hell-game.firebaseio.com",
+    "project_id": "bullet-hell-game",
+    "storage_bucket": "bullet-hell-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315786592822:android:6a47b773949b3d36",
+        "android_client_info": {
+          "package_name": "paras.cse3310.BulletHellGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315786592822-fvg36rj7c4hgef4fc5c6c97l9tpmqime.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-AH5RVE16w41eHBx2vY_gLLAlFrYpPFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315786592822-fvg36rj7c4hgef4fc5c6c97l9tpmqime.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
