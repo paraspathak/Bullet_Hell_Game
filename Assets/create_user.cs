@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
 
 public class create_user : MonoBehaviour
 {
@@ -13,7 +16,8 @@ public class create_user : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Initialize the database
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
     }
 
     // Update is called once per frame
@@ -48,6 +52,7 @@ public class create_user : MonoBehaviour
             auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
                 if (task.IsCanceled)
                 {
+                    system_message.SetText("task is cancelled");
                     Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
                     return;
                 }
@@ -65,8 +70,24 @@ public class create_user : MonoBehaviour
                 Firebase.Auth.FirebaseUser newUser = task.Result;
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                     newUser.DisplayName, newUser.UserId);
+                
             });
 
+            //Get the current User
+            Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+            
+            //Create a node in the datbase about the user
+            DatabaseReference databse = FirebaseDatabase.DefaultInstance.RootReference;
+
+            Dictionary<string, string> created_user = new Dictionary<string, string>();
+            created_user.Add("username", username);
+            created_user.Add("email", email);
+            created_user.Add("score", "0");
+
+            Debug.Log(user.UserId);
+            
+            databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
+            system_message.SetText("User is created");
         }
     }
 

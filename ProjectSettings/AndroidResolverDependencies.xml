@@ -6,6 +6,8 @@
     <package>com.google.firebase:firebase-auth:18.0.0</package>
     <package>com.google.firebase:firebase-auth-unity:6.2.0</package>
     <package>com.google.firebase:firebase-common:18.0.0</package>
+    <package>com.google.firebase:firebase-database:18.0.0</package>
+    <package>com.google.firebase:firebase-database-unity:6.2.0</package>
   </packages>
   <files>
     <file>Assets/Plugins/Android/androidx.annotation.annotation-1.0.0.jar</file>
@@ -54,6 +56,9 @@
     <file>Assets/Plugins/Android/com.google.firebase.firebase-auth-interop-18.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-auth-unity-6.2.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-common-18.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-database-18.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-database-collection-17.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.firebase.firebase-database-unity-6.2.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-iid-19.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-iid-interop-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-measurement-connector-18.0.0.aar</file>
