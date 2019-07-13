@@ -10,8 +10,7 @@ public class authenticate_user : MonoBehaviour
     public TMP_InputField passwordField;
     public TMP_Text system_message;
 
-
-    protected Firebase.Auth.FirebaseAuth auth;
+    
 
     public void AuthenticateUser()
     {
@@ -45,9 +44,32 @@ public class authenticate_user : MonoBehaviour
             else
             {
                 Debug.Log("Authenticate with Firebase here");
+                login_user(username, password);
             }
         }
         
+    }
+
+    public void login_user(string email, string password)
+    {
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                system_message.SetText("No Account found!");
+                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+        });
     }
     
     //Clears the system message as user types in their address
