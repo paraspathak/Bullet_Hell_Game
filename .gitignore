@@ -2,9 +2,6 @@
 # Created by https://www.gitignore.io/api/unity
 # Edit at https://www.gitignore.io/?templates=unity
 
-#Done for firebase
-google-services.json
-
 ### Unity ###
 # This .gitignore file should be placed at the root of your Unity project directory
 #
@@ -68,5 +65,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-
+*google-services.json
 # End of https://www.gitignore.io/api/unity
