@@ -96,11 +96,12 @@ public class create_user : MonoBehaviour
         system_message.SetText("");
     }
 
-    public void cancel_click()
+    //Used Unity UI to do it instead
+    public void switch_screen()
     {
-        usernameField.SetTextWithoutNotify("");
-        passwordField.SetTextWithoutNotify("");
-        emailField.SetTextWithoutNotify("");
+        GameObject createuser_screen = GameObject.Find("CreateUserPanel");
+        GameObject login_screen = GameObject.Find("LoginPanel"); ;
+        createuser_screen.SetActive(false);
+        login_screen.SetActive(true);
     }
-
 }
