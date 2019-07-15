@@ -10,63 +10,73 @@ using Firebase.Unity.Editor;
 using System;
 using System.Linq;
 
+
 public class retrieve_leaderboard : MonoBehaviour
 {
     public GameObject leaderboard_area;
 
-    protected Dictionary<string, TMP_Text> map;
-    protected DatabaseReference database;
+    //To store the text reference to update with database entry
+    protected List<TMP_Text> texts;
+    protected List<TMP_Text> score;
+
+    //Access the database entry
+    //protected DatabaseReference database;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Add elements onto the map for easy access for updating
-        map = new Dictionary<string, TMP_Text>();
+        //Initialization
+        texts = new List<TMP_Text>();
+        score = new List<TMP_Text>();
+        //Access object
         TMP_Text[] table_entry = leaderboard_area.GetComponentsInChildren<TMP_Text>();
+        //Store in different places
         foreach (TMP_Text child in table_entry)
         {
-            map.Add(child.name, child);
+            if (child.name.Contains("username"))
+            {
+                texts.Add(child);
+            }
+            else
+            {
+                score.Add(child);
+            }
         }
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
-        database = FirebaseDatabase.DefaultInstance.RootReference;
-        load_leaderboard();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
+        //Initialize the databse
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
+        DatabaseReference database = FirebaseDatabase.DefaultInstance.RootReference;
+        database.Child("leaderboard").ValueChanged += Retrieve_leaderboard_ValueChanged;    //Add a listener
+        
+       
     }
 
-    public void load_leaderboard()
+    private void Retrieve_leaderboard_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        //Access the leaderboard region of the database        
-        database.Child("leaderboard").GetValueAsync().ContinueWith(task=> {
-            if (task.IsFaulted)
-            {
-                Debug.Log("Cannot access database");
-                update_error();
-            }
-            else if (task.IsCompleted)
-            {
-                update_leaderboard(task.Result);
-            }
-        });
-    }
-
-    public void update_leaderboard(DataSnapshot snapshot)
-    {
-        foreach (DataSnapshot leaderboard_entry in snapshot.Children)
+        if (e.DatabaseError != null)
         {
-            IDictionary dictUser = (IDictionary)leaderboard_entry.Value;
-            Debug.Log("" + dictUser["username"] + " - " + dictUser["score"]);
+            Debug.LogError(e.DatabaseError.Message);
+            update_error();
+            return;
         }
-
+        int counter = 0;    //Count for only first 4 entries
+        foreach(DataSnapshot snapshot in e.Snapshot.Children)
+        {
+            if (counter > 3)
+            {
+                break;
+            }
+            IDictionary dictionary = (IDictionary)snapshot.Value;
+            Debug.Log("username: " + dictionary["username"]);
+            score[counter].SetText(dictionary["score"].ToString());
+            texts[counter].SetText(dictionary["username"].ToString());
+            counter++;
+        }
     }
-
+   
     public void update_error()
     {
-
+        
     }
 
 }
