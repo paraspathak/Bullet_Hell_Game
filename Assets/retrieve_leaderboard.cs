@@ -46,9 +46,7 @@ public class retrieve_leaderboard : MonoBehaviour
         //Initialize the databse
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
         DatabaseReference database = FirebaseDatabase.DefaultInstance.RootReference;
-        database.Child("leaderboard").ValueChanged += Retrieve_leaderboard_ValueChanged;    //Add a listener
-        
-       
+        database.Child("leaderboard").OrderByChild("score").ValueChanged += Retrieve_leaderboard_ValueChanged;    //Add a listener
     }
 
     private void Retrieve_leaderboard_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -76,7 +74,7 @@ public class retrieve_leaderboard : MonoBehaviour
    
     public void update_error()
     {
-        
+        texts[0].SetText("Cannot connect with Database!");
     }
 
 }
