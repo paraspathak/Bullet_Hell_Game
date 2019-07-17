@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject panel;
+
+    private void Start()
+    {
+        openPanel();
+    }
+
+    public void openPanel()
+    {
+        if (panel != null)
+        {
+            Animator animator = panel.GetComponent<Animator>();
+            if (animator != null)
+            {
+                bool isOpen = animator.GetBool("open");
+                animator.SetBool("open", !isOpen);
+            }
+        }
+    }
 
     //Quit click handler
     public void onQuitClicked()

@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8976ef85c41d3249bbc704956e795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &47040953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8976ef85c41d3249bbc704956e795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &47040954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,6 +1377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 218242209}
+  - component: {fileID: 218242210}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1401,9 +1404,28 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000095367, y: -3.8}
+  m_AnchoredPosition: {x: -0.00000095367, y: 320}
   m_SizeDelta: {x: 162.54, y: 277.7}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &218242210
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218242208}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cadd58dac6834924cb4e008958dccaad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &261599895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,7 +2221,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2695,6 +2717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8976ef85c41d3249bbc704956e795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 218242208}
 --- !u!1 &545365909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,6 +3392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8976ef85c41d3249bbc704956e795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &720911341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4980,6 +5004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8976ef85c41d3249bbc704956e795ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!114 &1026889519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5784,7 +5809,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
