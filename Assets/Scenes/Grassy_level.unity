@@ -484,7 +484,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 80b8299a28a808d4c9457020a1ff3589,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 80b8299a28a808d4c9457020a1ff3589,
         type: 3}
@@ -615,6 +615,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1653959772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 80b8299a28a808d4c9457020a1ff3589,
+    type: 3}
+  m_PrefabInstance: {fileID: 774226103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1653959773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653959772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24af5c853f9bce943ba2d44b31e15472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  background: {fileID: 1653959774}
+--- !u!23 &1653959774 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 80b8299a28a808d4c9457020a1ff3589,
+    type: 3}
+  m_PrefabInstance: {fileID: 774226103}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1736926344
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172668396564183}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5.13, y: -70.51, z: 21.26}
+  m_LocalPosition: {x: 4.91, y: -70.51, z: 21.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7606006755549602986}
@@ -1031,7 +1057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4797762519663820499}
   m_LocalRotation: {x: -0.5, y: -0.49999997, z: 0.5, w: 0.50000006}
-  m_LocalPosition: {x: 5.1423993, y: 1.2532041, z: 0}
+  m_LocalPosition: {x: 5.9, y: 1.2532041, z: 5.88}
   m_LocalScale: {x: 20.289623, y: 20.289623, z: 69.28963}
   m_Children: []
   m_Father: {fileID: 5006512736130178244}
