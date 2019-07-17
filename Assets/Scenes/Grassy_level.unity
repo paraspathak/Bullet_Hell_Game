@@ -421,6 +421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: background2
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 80b8299a28a808d4c9457020a1ff3589,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 80b8299a28a808d4c9457020a1ff3589,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -633,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24af5c853f9bce943ba2d44b31e15472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   background: {fileID: 1653959774}
 --- !u!23 &1653959774 stripped
 MeshRenderer:
