@@ -12,10 +12,10 @@ Executive Summary:
   
   To update your forked repo with changes commited to the master:
   1) You need to set up upstream as remote branch (Need to do it once)
-      i)   git remote add upstream https://github.com/paraspathak/Bullet_Hell_Game
-      ii)  git fetch upstream
-      iii) git checkout master
-      iv)  git rebase upstream/master
+      1)   git remote add upstream https://github.com/paraspathak/Bullet_Hell_Game
+      2)  git fetch upstream
+      3) git checkout master
+      4)  git rebase upstream/master
   2) Then push changes for the first time as 
       git push -f origin <branch name>
   where branch name is the branch you are working on.
