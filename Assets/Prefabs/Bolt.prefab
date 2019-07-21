@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 286215452294025749}
   - component: {fileID: 286215452294025748}
   - component: {fileID: 286215452294025747}
-  - component: {fileID: 286215452294025746}
+  - component: {fileID: 1873105321513764984}
   m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
@@ -139,9 +139,9 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.035
   m_Height: 0.58
-  m_Direction: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &286215452294025746
+--- !u!114 &1873105321513764984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 286215452294025745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34ab1fba258da6443910f5619b8f78b9, type: 3}
+  m_Script: {fileID: 11500000, guid: ea1bed520fa553943808dda56613fea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shot: {fileID: 286215452294025748}
