@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class Menu : MonoBehaviour
     public void onPlayClicked()
     {
         Debug.Log("PLAY CLICKED");
+        //Load the next scene in play
+        //Put the next scene as ship customization
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void onMusicSliderChange()

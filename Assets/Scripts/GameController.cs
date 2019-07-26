@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -15,9 +16,14 @@ public class GameController : MonoBehaviour
     public Text restartText;
     public Text gameOverText;
 
+    //So as other classes can access it
+    public static int score;
+
+
     private bool gameOver;
     private bool restart;
-    private int score;
+    
+    private float delay = 5;    //Delay of time before the leaderboard pops open
 
 
     void Start()
@@ -81,5 +87,7 @@ public class GameController : MonoBehaviour
     {
         gameOverText.text = "GAME OVER";
         gameOver = true;
+        //Load the next scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
