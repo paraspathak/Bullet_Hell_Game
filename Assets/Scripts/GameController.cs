@@ -17,15 +17,16 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text restartText;
     public Text gameOverText;
+    public GameObject continue_button;
 
     //So as other classes can access it
     public static int score;
 
-
+    private DatabaseReference leaderboard;
     private bool gameOver;
     private bool restart;
     private string UserName;
-    
+
     private float delay = 5;    //Delay of time before the leaderboard pops open
 
 
@@ -35,10 +36,11 @@ public class GameController : MonoBehaviour
         restart = false;
         restartText.text = " ";
         gameOverText.text = " ";
+        continue_button.SetActive(false);
         score = 0;
         UserName = Menu.username;
         UpdateScore();
-        StartCoroutine (SpawnWaves());
+        StartCoroutine(SpawnWaves());
     }
 
     void Update()
@@ -55,14 +57,14 @@ public class GameController : MonoBehaviour
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(startWait);
-        while(true)
+        while (true)
         {
-            for(int i = 0; i < hazardCount; i++)
+            for (int i = 0; i < hazardCount; i++)
             {
                 GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                Instantiate (hazard, spawnPosition, spawnRotation);
+                Instantiate(hazard, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
@@ -92,70 +94,111 @@ public class GameController : MonoBehaviour
         gameOverText.text = "GAME OVER";
         gameOver = true;
 
+        //Show the hidden button
+        continue_button.SetActive(true);
+
+        Debug.Log("Game over");
+
         //Update the database here
-        FirebaseDatabase.DefaultInstance.GetReference("leaderboard").GetValueAsync().ContinueWith(task => {
-            if (task.IsFaulted)
-            {
-                //Handle error here
-            }
-            else if(task.IsCompleted)
-            {
-                DatabaseReference leaderboard = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
-                DataSnapshot snapshot = task.Result;
-                int fourth = System.Int32.Parse(snapshot.Child("4").Child("score").Value.ToString());
-                if(score> fourth)
+        leaderboard = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
+        leaderboard.ValueChanged += GameController_ValueChanged;
+        /*
+            FirebaseDatabase.DefaultInstance.GetReference("leaderboard").GetValueAsync().ContinueWith(task => {
+                if (task.IsFaulted)
                 {
-                    int third= System.Int32.Parse(snapshot.Child("3").Child("score").Value.ToString()); ;
-                    if (score > third)
+                    //Handle error here
+                }
+                else if(task.IsCompleted)
+                {
+                    DatabaseReference leaderboard = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
+                    DataSnapshot snapshot = task.Result;
+                    int fourth = System.Int32.Parse(snapshot.Child("4").Child("score").Value.ToString());
+                    if(score> fourth)
                     {
-                        int second = System.Int32.Parse(snapshot.Child("2").Child("score").Value.ToString());
-                        if (score > second)
+                        int third= System.Int32.Parse(snapshot.Child("3").Child("score").Value.ToString()); ;
+                        if (score > third)
                         {
-                            int first = System.Int32.Parse(snapshot.Child("1").Child("score").Value.ToString());
-                            if (score > 1)
+                            int second = System.Int32.Parse(snapshot.Child("2").Child("score").Value.ToString());
+                            if (score > second)
                             {
-                                //Update first place
-                                leaderboard.Child("1").SetValueAsync(ToDictionary());
-                                Debug.Log("First");
+                                int first = System.Int32.Parse(snapshot.Child("1").Child("score").Value.ToString());
+                                if (score > 1)
+                                {
+                                    //Update first place
+                                    leaderboard.Child("1").SetValueAsync(ToDictionary());
+                                    Debug.Log("First");
+                                }
+                                else
+                                {
+                                    //update second place
+                                    leaderboard.Child("2").SetValueAsync(ToDictionary());
+                                    Debug.Log("Second");
+                                }
                             }
                             else
                             {
-                                //update second place
-                                leaderboard.Child("2").SetValueAsync(ToDictionary());
-                                Debug.Log("Second");
+                                //Update third place
+                                leaderboard.Child("3").SetValueAsync(ToDictionary());
+                                Debug.Log("Third");
                             }
                         }
                         else
                         {
-                            //Update third place
-                            leaderboard.Child("3").SetValueAsync(ToDictionary());
-                            Debug.Log("Third");
+                            //Update fourth place
+                            leaderboard.Child("4").SetValueAsync(ToDictionary());
+                            Debug.Log("Fourth");
                         }
                     }
-                    else
-                    {
-                        //Update fourth place
-                        leaderboard.Child("4").SetValueAsync(ToDictionary());
-                        Debug.Log("Fourth");
-                    }
+                    //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-        });
-
+            });
+        */
         //Load the next scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    private void GameController_ValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError(e.DatabaseError.Message);
+            return;
+        }
+        int counter = 1;
+        foreach (DataSnapshot dataSnapshot in e.Snapshot.Children)
+        {
+            IDictionary dictionary = (IDictionary)dataSnapshot.Value;
+            int current_score = System.Int32.Parse(dictionary["score"].ToString());
+            if (score > current_score)
+            {
+                //Update the entry here
+
+                //<<TODO>> having issue here
+                leaderboard.Child(counter.ToString()).SetValueAsync(ToDictionary());
+                Debug.Log("Database is updated");
+                return;
+            }
+            counter++;
+        }
+    }
+
     public Dictionary<string, string> ToDictionary()
     {
         Dictionary<string, string> result = new Dictionary<string, string>();
 
         //Get the username and update score here
 
-        result["username"] = UserName;
+        result["username"] = Menu.username;
+        Debug.Log("username from Menu is: " + result["username"]);
         Debug.Log("username: " + UserName);
         result["score"] = score.ToString();
 
         return result;
+    }
+
+    public void load_next_scene()
+    {
+        //Load the next scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
