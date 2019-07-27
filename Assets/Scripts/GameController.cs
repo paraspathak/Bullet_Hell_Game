@@ -124,14 +124,28 @@ public class GameController : MonoBehaviour
         scoreboard.Sort(delegate (User x, User y) {
             return y.get_score().CompareTo(x.get_score());
         });
-        Debug.Log("Scoreboard is sorted" + scoreboard);
-
+        Debug.Log("Scoreboard is sorted");
         Dictionary<string, object> final = new Dictionary<string, object>();
+        string previous_username = scoreboard[0].get_username();
+        int previous_score= scoreboard[1].get_score();
         final.Add("1", ToDictionary(scoreboard[0]));
-        final.Add("2", ToDictionary(scoreboard[1]));
-        final.Add("3", ToDictionary(scoreboard[2]));
-        final.Add("4", ToDictionary(scoreboard[3]));
-
+        int counter = 2;
+        foreach( var item in scoreboard)
+        {
+            if (counter > 4)
+            {
+                break;
+            }
+            //Only add non repeated items in the dictionary
+            if (!(item.get_username().Equals(previous_username) && item.get_score() == previous_score))
+            {
+                Debug.Log(item.get_score() + " sorted " + item.get_username());
+                final.Add(counter.ToString(),ToDictionary(item));
+                previous_score = item.get_score();
+                previous_username = item.get_username();
+                counter++;
+            }            
+        }
         leaderboard.SetValueAsync(final);
 
     }
@@ -143,7 +157,7 @@ public class GameController : MonoBehaviour
         //Get the username and update score here
         result["username"] = user.get_username();
         result["score"] = user.get_score().ToString();
-        Debug.Log("username from Menu is: " + result["username"] + "Score is : " + user.get_score());
+        //Debug.Log("username from Menu is: " + result["username"] + "Score is : " + user.get_score());
         return result;
     }
 
