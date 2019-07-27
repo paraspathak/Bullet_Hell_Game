@@ -102,59 +102,7 @@ public class GameController : MonoBehaviour
         //Update the database here
         leaderboard = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
         leaderboard.ValueChanged += GameController_ValueChanged;
-        /*
-            FirebaseDatabase.DefaultInstance.GetReference("leaderboard").GetValueAsync().ContinueWith(task => {
-                if (task.IsFaulted)
-                {
-                    //Handle error here
-                }
-                else if(task.IsCompleted)
-                {
-                    DatabaseReference leaderboard = FirebaseDatabase.DefaultInstance.GetReference("leaderboard");
-                    DataSnapshot snapshot = task.Result;
-                    int fourth = System.Int32.Parse(snapshot.Child("4").Child("score").Value.ToString());
-                    if(score> fourth)
-                    {
-                        int third= System.Int32.Parse(snapshot.Child("3").Child("score").Value.ToString()); ;
-                        if (score > third)
-                        {
-                            int second = System.Int32.Parse(snapshot.Child("2").Child("score").Value.ToString());
-                            if (score > second)
-                            {
-                                int first = System.Int32.Parse(snapshot.Child("1").Child("score").Value.ToString());
-                                if (score > 1)
-                                {
-                                    //Update first place
-                                    leaderboard.Child("1").SetValueAsync(ToDictionary());
-                                    Debug.Log("First");
-                                }
-                                else
-                                {
-                                    //update second place
-                                    leaderboard.Child("2").SetValueAsync(ToDictionary());
-                                    Debug.Log("Second");
-                                }
-                            }
-                            else
-                            {
-                                //Update third place
-                                leaderboard.Child("3").SetValueAsync(ToDictionary());
-                                Debug.Log("Third");
-                            }
-                        }
-                        else
-                        {
-                            //Update fourth place
-                            leaderboard.Child("4").SetValueAsync(ToDictionary());
-                            Debug.Log("Fourth");
-                        }
-                    }
-                    //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
-            });
-        */
-        //Load the next scene
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 
     private void GameController_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -164,35 +112,38 @@ public class GameController : MonoBehaviour
             Debug.LogError(e.DatabaseError.Message);
             return;
         }
-        int counter = 1;
+        //int counter = 1;
+        List<User> scoreboard = new List<User>();
         foreach (DataSnapshot dataSnapshot in e.Snapshot.Children)
         {
             IDictionary dictionary = (IDictionary)dataSnapshot.Value;
             int current_score = System.Int32.Parse(dictionary["score"].ToString());
-            if (score > current_score)
-            {
-                //Update the entry here
-
-                //<<TODO>> having issue here
-                leaderboard.Child(counter.ToString()).SetValueAsync(ToDictionary());
-                Debug.Log("Database is updated");
-                return;
-            }
-            counter++;
+            scoreboard.Add(new User(dictionary["username"].ToString(), current_score));
         }
+        scoreboard.Add(new User(Menu.username, score));
+        scoreboard.Sort(delegate (User x, User y) {
+            return y.get_score().CompareTo(x.get_score());
+        });
+        Debug.Log("Scoreboard is sorted" + scoreboard);
+
+        Dictionary<string, object> final = new Dictionary<string, object>();
+        final.Add("1", ToDictionary(scoreboard[0]));
+        final.Add("2", ToDictionary(scoreboard[1]));
+        final.Add("3", ToDictionary(scoreboard[2]));
+        final.Add("4", ToDictionary(scoreboard[3]));
+
+        leaderboard.SetValueAsync(final);
+
     }
 
-    public Dictionary<string, string> ToDictionary()
+    public Dictionary<string, string> ToDictionary(User user)
     {
         Dictionary<string, string> result = new Dictionary<string, string>();
 
         //Get the username and update score here
-
-        result["username"] = Menu.username;
-        Debug.Log("username from Menu is: " + result["username"]);
-        Debug.Log("username: " + UserName);
-        result["score"] = score.ToString();
-
+        result["username"] = user.get_username();
+        result["score"] = user.get_score().ToString();
+        Debug.Log("username from Menu is: " + result["username"] + "Score is : " + user.get_score());
         return result;
     }
 
@@ -200,5 +151,32 @@ public class GameController : MonoBehaviour
     {
         //Load the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+}
+
+public class User
+{
+    private string username;
+    private int score;
+    public User(string name, int sc)
+    {
+        username = name;
+        score = sc;
+    }
+    public string get_username()
+    {
+        return username;
+    }
+    public int get_score()
+    {
+        return score;
+    }
+    public static bool operator >(User a, User b)
+    {
+        return a.get_score() > b.get_score();
+    }
+    public static bool operator <(User a, User b)
+    {
+        return a.get_score() < b.get_score();
     }
 }
