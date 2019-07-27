@@ -19,12 +19,17 @@ public class retrieve_leaderboard : MonoBehaviour
     protected List<TMP_Text> texts;
     protected List<TMP_Text> score;
 
+    //Store the score retrieved from databse
+    protected int player_score;
+    protected string player_name;
     //Access the database entry
     //protected DatabaseReference database;
 
     // Start is called before the first frame update
     void Start()
     {
+        player_score = GameController.score;
+        player_name = Menu.username;
         //Initialization
         texts = new List<TMP_Text>();
         score = new List<TMP_Text>();
@@ -42,7 +47,8 @@ public class retrieve_leaderboard : MonoBehaviour
                 score.Add(child);
             }
         }
-        
+        score[3].SetText(player_score.ToString());
+        texts[3].SetText(player_name);
         //Initialize the databse
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
         DatabaseReference database = FirebaseDatabase.DefaultInstance.RootReference;
@@ -66,8 +72,8 @@ public class retrieve_leaderboard : MonoBehaviour
             }
             IDictionary dictionary = (IDictionary)snapshot.Value;
             Debug.Log("username: " + dictionary["username"]);
-            score[counter].SetText(dictionary["score"].ToString());
-            texts[counter].SetText(dictionary["username"].ToString());
+            score[3-counter].SetText(dictionary["score"].ToString());
+            texts[3-counter].SetText(dictionary["username"].ToString());
             counter++;
         }
     }
