@@ -72,8 +72,8 @@ public class retrieve_leaderboard : MonoBehaviour
             }
             IDictionary dictionary = (IDictionary)snapshot.Value;
             Debug.Log("username: " + dictionary["username"]);
-            score[counter].SetText(dictionary["score"].ToString());
-            texts[counter].SetText(dictionary["username"].ToString());
+            score[3-counter].SetText(dictionary["score"].ToString());
+            texts[3-counter].SetText(dictionary["username"].ToString());
             counter++;
         }
     }
