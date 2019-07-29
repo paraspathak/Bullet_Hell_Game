@@ -214,6 +214,11 @@ public class GameController : MonoBehaviour
         //Load the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void load_main_menu()
+    {
+        SceneManager.LoadScene(1);
+    }
 }
 
 public class User
