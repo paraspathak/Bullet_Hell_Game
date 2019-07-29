@@ -122,13 +122,12 @@ public class GameController : MonoBehaviour
                     return y.get_score().CompareTo(x.get_score());
                 });
                 Debug.Log("Scoreboard is sorted"+ scoreboard.Capacity);
-                Debug.Log("Last" + scoreboard[scoreboard.Capacity - 1].get_score());
-                Debug.Log("First" + scoreboard[0].get_score());
+                
                 Dictionary<string, object> final = new Dictionary<string, object>();
-                string previous_username = scoreboard[0].get_username();
-                int previous_score = scoreboard[1].get_score();
-                final.Add("1", ToDictionary(scoreboard[0]));
-                int counter = 2;
+                string previous_username = " ";
+                int previous_score = -5;
+                //final.Add("1", ToDictionary(scoreboard[0]));
+                int counter = 1;
                 foreach (var item in scoreboard)
                 {
                     if (counter > 4)
