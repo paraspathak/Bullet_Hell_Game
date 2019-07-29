@@ -9,7 +9,7 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 using System;
 using System.Linq;
-
+using UnityEngine.SceneManagement;
 
 public class retrieve_leaderboard : MonoBehaviour
 {
@@ -81,6 +81,11 @@ public class retrieve_leaderboard : MonoBehaviour
     public void update_error()
     {
         texts[0].SetText("Cannot connect with Database!");
+    }
+
+    public void onMainMenuClick()
+    {
+        SceneManager.LoadScene(1);  //Main Menu is the second scene that is loaded
     }
 
 }

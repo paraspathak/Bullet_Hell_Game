@@ -11,10 +11,12 @@ public class Menu : MonoBehaviour
     //Load the username here already
     public static string username;
 
+    private Firebase.Auth.FirebaseAuth auth;
+
     private void Start()
     {
         openPanel();
-        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         //username = auth.CurrentUser.UserId;
         string user = auth.CurrentUser.UserId;
         DatabaseReference username_database = FirebaseDatabase.DefaultInstance.GetReference("users").Child(user);
@@ -70,5 +72,11 @@ public class Menu : MonoBehaviour
     public void onVolumeSliderChange()
     {
 
+    }
+
+    public void onLogOutClick()
+    {
+        auth.SignOut();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1); //Load the previous screen
     }
 }
