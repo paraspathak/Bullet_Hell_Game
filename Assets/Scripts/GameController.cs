@@ -218,6 +218,7 @@ public class GameController : MonoBehaviour
     public void load_main_menu()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1; //Game is paused so reload the game
     }
 }
 
