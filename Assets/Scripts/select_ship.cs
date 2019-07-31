@@ -9,6 +9,8 @@ public class select_ship : MonoBehaviour
 {
     public static int selected_ship;
     public TMP_Text system_message;
+    public TMP_Text speed;
+    public TMP_Text firerate;
     public Button first;
     public Button second;
 
@@ -19,9 +21,7 @@ public class select_ship : MonoBehaviour
         //Initially select first ship displayed
         selected_ship = 0;
         signature_color = new Color(0f, 255f, 255f, 255f);
-        system_message.SetText("fancy name for blue ship");
-        first.image.color = signature_color;
-        second.image.color = Color.gray;
+        first_ship_selected();
     }
 
     // Update is called once per frame
@@ -36,6 +36,9 @@ public class select_ship : MonoBehaviour
         system_message.SetText("Fancy name for blue ship");
         first.image.color = signature_color;
         second.image.color = Color.grey;
+        speed.SetText("Speed: 90");
+        firerate.SetText("Fire Rate: 70");
+
     }
     public void second_ship_selected()
     {
@@ -43,6 +46,8 @@ public class select_ship : MonoBehaviour
         system_message.SetText("Fancy name for another ship");
         second.image.color = signature_color;
         first.image.color = Color.grey;
+        speed.SetText("Speed: 70");
+        firerate.SetText("Fire Rate: 90");
     }
 
     public void on_play_click()

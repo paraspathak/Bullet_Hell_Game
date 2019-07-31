@@ -22,6 +22,21 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource explosion;
 
+    void Start()
+    {
+        if (select_ship.selected_ship == 1)
+        {
+            //Faster but worse shooting ship
+            speed = 30;
+            fireRate = 0.40f;
+        }
+        else
+        {
+            //Slower but better shooting ship
+            speed = 10;
+            fireRate = 0.20f;
+        }
+    }
 
     void Update()
     {
