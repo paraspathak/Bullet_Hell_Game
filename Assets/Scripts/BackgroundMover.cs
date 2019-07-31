@@ -9,6 +9,6 @@ public class BackgroundMover : MonoBehaviour
 
     void Start()
     {
-        background.velocity  = transform.up * speed;
+        background.velocity  = transform.forward * speed;
     }
 }
