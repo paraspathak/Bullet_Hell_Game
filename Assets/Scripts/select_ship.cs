@@ -36,8 +36,8 @@ public class select_ship : MonoBehaviour
         system_message.SetText("Fancy name for blue ship");
         first.image.color = signature_color;
         second.image.color = Color.grey;
-        speed.SetText("Speed: 90");
-        firerate.SetText("Fire Rate: 70");
+        speed.SetText("Speed: 70");
+        firerate.SetText("Fire Rate: 90");
 
     }
     public void second_ship_selected()
@@ -46,8 +46,8 @@ public class select_ship : MonoBehaviour
         system_message.SetText("Fancy name for another ship");
         second.image.color = signature_color;
         first.image.color = Color.grey;
-        speed.SetText("Speed: 70");
-        firerate.SetText("Fire Rate: 90");
+        speed.SetText("Speed: 90");
+        firerate.SetText("Fire Rate: 70");
     }
 
     public void on_play_click()
