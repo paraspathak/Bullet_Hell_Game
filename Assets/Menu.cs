@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
     public GameObject panel;
+    public Slider music_slider;
+    public Slider volume_slider;
 
     //Load the username here already
     public static string username;
@@ -67,11 +70,12 @@ public class Menu : MonoBehaviour
     public void onMusicSliderChange()
     {
         //Change Volume here
+        AudioListener.volume = music_slider.value;
     }
 
     public void onVolumeSliderChange()
     {
-
+        AudioListener.volume = volume_slider.value;
     }
 
     public void onLogOutClick()
