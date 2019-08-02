@@ -37,6 +37,7 @@ public class Menu : MonoBehaviour
         IDictionary dictionary = (IDictionary)e.Snapshot.Value;
         username = dictionary["username"].ToString();
         Debug.Log("username from database: " + username);
+        save_credential();
     }
 
     public void openPanel()
@@ -82,5 +83,24 @@ public class Menu : MonoBehaviour
     {
         auth.SignOut();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1); //Load the previous screen
+    }
+
+    //Working
+    public void save_credential()
+    {
+        if (authenticate_user.save)
+        {
+            string[] output = { "true", username, authenticate_user.email, authenticate_user.pasword};
+            Debug.Log(output[1]);
+            Debug.Log(output[2]);
+            Debug.Log(output[3]);
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/user.dat", output);
+        }
+        else
+        {
+            string[] output = { "false"};
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/user.dat", output);
+        }
+        
     }
 }

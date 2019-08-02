@@ -85,7 +85,7 @@ public class retrieve_leaderboard : MonoBehaviour
 
     public void onMainMenuClick()
     {
-        SceneManager.LoadScene(1);  //Main Menu is the second scene that is loaded
+        SceneManager.LoadScene(2);  //Main Menu is the second scene that is loaded
     }
 
 }

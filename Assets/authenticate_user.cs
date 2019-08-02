@@ -11,17 +11,24 @@ public class authenticate_user : MonoBehaviour
     public TMP_InputField passwordField;
     public TMP_Text system_message;
 
+    public static string email;
+    public static string pasword;
+    public static bool save;
+
     private Firebase.Auth.FirebaseAuth auth;
 
     private void Start()
     {
         auth = auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        save = true;
     }
 
     public void AuthenticateUser()
     {
         string username =  usernameField.text;
         string password = passwordField.text;
+        pasword = password;
+        email = username;
         //Check if the fields are empty
         int count_error = 0;
         if (username.Length == 0) { count_error += 5; }
