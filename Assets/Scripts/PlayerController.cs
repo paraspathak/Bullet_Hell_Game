@@ -40,12 +40,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("Fire2") && Time.time > nextFire)
+        foreach (Touch touch in Input.touches)
         {
-            nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-            explosion = GetComponent<AudioSource>();
-            explosion.Play();
+            if (touch.phase == TouchPhase.Began && Time.time > nextFire)
+            {            
+                nextFire = Time.time + fireRate;
+                Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+                explosion = GetComponent<AudioSource>();
+                explosion.Play();
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -62,10 +62,10 @@ public class disk_lookup : MonoBehaviour
         }
         catch(System.Exception e)
         {
-            Debug.Log(e.Data);
+            Debug.Log(e);
+            FileStream fs = File.Create(Application.persistentDataPath + "/user.dat");
             return 1;
         }
-        
-        
+       
     }
 }
