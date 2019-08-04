@@ -118,4 +118,9 @@ public class authenticate_user : MonoBehaviour
         Debug.Log("active scene is " + SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void on_save_click()
+    {
+        save = !save ;
+    }
 }

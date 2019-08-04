@@ -88,19 +88,28 @@ public class Menu : MonoBehaviour
     //Working
     public void save_credential()
     {
+        Debug.Log(authenticate_user.save);
         //needs some testing
         if (authenticate_user.save)
         {
             string[] output = { "true", username, authenticate_user.email, authenticate_user.pasword};
-            Debug.Log(output[1]);
-            Debug.Log(output[2]);
-            Debug.Log(output[3]);
-            System.IO.File.WriteAllLines(Application.persistentDataPath + "/user.dat", output);
+            
+            //Check if the file already has the credentials
+            if (output[3] != null)
+            {
+                 
+                Debug.Log(output[1]);
+                Debug.Log(output[2]);
+                Debug.Log(output[3]);
+                System.IO.File.WriteAllLines(Application.persistentDataPath + "/user.dat", output);
+            }
+            
         }
         else
         {
-            string[] output = { "false"};
+            string[] output = {"false"};
             System.IO.File.WriteAllLines(Application.persistentDataPath + "/user.dat", output);
+            Debug.Log(Application.persistentDataPath);
         }
         
     }

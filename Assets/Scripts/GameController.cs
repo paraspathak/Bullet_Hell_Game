@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GameController : MonoBehaviour
     public float waveWait;
     public Text scoreText;
     public Text restartText;
-    public Text gameOverText;
+    public TMP_Text gameOverText;
     public GameObject continue_button;
 
     //So as other classes can access it

@@ -33,6 +33,7 @@ public class disk_lookup : MonoBehaviour
         Debug.Log(lines);
         if (lines[0].Equals("true"))
         {
+            authenticate_user.save = true;  //Propagate the save
             Debug.Log("Username is saved, loading...");
             string username = lines[1];
             Debug.Log(username);
