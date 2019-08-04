@@ -88,6 +88,7 @@ public class Menu : MonoBehaviour
     //Working
     public void save_credential()
     {
+        //needs some testing
         if (authenticate_user.save)
         {
             string[] output = { "true", username, authenticate_user.email, authenticate_user.pasword};
