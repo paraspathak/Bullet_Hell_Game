@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 197687210}
   - component: {fileID: 197687211}
   m_Layer: 0
-  m_Name: mainmenu
+  m_Name: leaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,7 +411,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dd203c917776476459528e00019882c2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 03e4613a455e54745b46de86b43e2da5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1370,7 +1370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 3.699997, y: 242.59998}
+  m_AnchoredPosition: {x: 3.6999512, y: 242.59998}
   m_SizeDelta: {x: -7.399994, y: 45.299988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042265531
