@@ -33,6 +33,7 @@ public class select_ship : MonoBehaviour
     public void first_ship_selected()
     {
         selected_ship = 0;
+
         system_message.SetText("Aegis");
         first.image.color = signature_color;
         second.image.color = Color.grey;
@@ -43,6 +44,7 @@ public class select_ship : MonoBehaviour
     public void second_ship_selected()
     {
         selected_ship = 1;
+
         system_message.SetText("Falken");
         second.image.color = signature_color;
         first.image.color = Color.grey;
