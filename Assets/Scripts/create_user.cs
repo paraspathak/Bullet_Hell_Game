@@ -14,6 +14,9 @@ public class create_user : MonoBehaviour
     public TMP_InputField emailField;
     public TMP_Text system_message;
 
+
+    private string user_id;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,8 @@ public class create_user : MonoBehaviour
                 else
                 {
                     system_message.SetText("New Account created");
+                    user_id = task.Result.UserId;
+                    /*
                     Firebase.Auth.FirebaseUser user2 = auth.CurrentUser;
                     if (user2 != null)
                     {
@@ -82,7 +87,25 @@ public class create_user : MonoBehaviour
                         databse.Child(user2.UserId).SetValueAsync(created_user);
                         system_message.SetText("User is created");
                     }
+                    */
                 }
+                Firebase.Auth.FirebaseUser user2 = auth.CurrentUser;
+                if (user2 != null)
+                {
+                    //Create a node in the datbase about the user
+                    DatabaseReference databse = FirebaseDatabase.DefaultInstance.RootReference.Child("users");
+
+                    Dictionary<string, string> created_user = new Dictionary<string, string>();
+                    created_user.Add("username", username);
+                    created_user.Add("email", email);
+                    created_user.Add("score", "0");
+
+                    Debug.Log(user2.UserId);
+
+                    databse.Child(user2.UserId).SetValueAsync(created_user);
+                    system_message.SetText("User is created");
+                }
+
                 // Firebase user has been created.
                 Firebase.Auth.FirebaseUser newUser = task.Result;
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
@@ -105,7 +128,24 @@ public class create_user : MonoBehaviour
                 Debug.Log(user.UserId);
 
                 databse.Child("users_attempt").Child(user.UserId).SetValueAsync(created_user);
+                //databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
                 system_message.SetText("User is created");
+            }
+            if (user_id != null)
+            {
+                //Create a node in the datbase about the user
+                DatabaseReference databse = FirebaseDatabase.DefaultInstance.RootReference;
+
+                Dictionary<string, string> created_user = new Dictionary<string, string>();
+                created_user.Add("username", username);
+                created_user.Add("email", email);
+                created_user.Add("score", "0");
+
+                Debug.Log(user.UserId);
+
+                databse.Child("users").Child(user_id).SetValueAsync(created_user);
+                //databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
+                system_message.SetText("User id is not null and is created");
             }
             
         }

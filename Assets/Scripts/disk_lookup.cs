@@ -1,3 +1,5 @@
+using Firebase;
+using Firebase.Unity.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +14,7 @@ public class disk_lookup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://bullet-hell-game.firebaseio.com/");
         scene_number = read_data();
         Debug.Log(scene_number);
     }
