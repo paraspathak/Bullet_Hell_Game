@@ -27,13 +27,14 @@ public class select_ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void first_ship_selected()
     {
         selected_ship = 0;
-        system_message.SetText("Blue Fighter");
+
+        system_message.SetText("Aegis");
         first.image.color = signature_color;
         second.image.color = Color.grey;
         speed.SetText("Speed: 70");
@@ -43,7 +44,8 @@ public class select_ship : MonoBehaviour
     public void second_ship_selected()
     {
         selected_ship = 1;
-        system_message.SetText("White Fighter");
+
+        system_message.SetText("Falken");
         second.image.color = signature_color;
         first.image.color = Color.grey;
         speed.SetText("Speed: 90");
@@ -53,7 +55,7 @@ public class select_ship : MonoBehaviour
     public void on_play_click()
     {
         //Load next scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
