@@ -30,11 +30,33 @@ public class create_user : MonoBehaviour
         
     }
 
+    private string get_username_from_email(string email)
+    {
+        string user="";
+        for (int i=0; i<email.Length; i++)
+        {
+            if (email[i] == '@')
+            {
+                break;
+            }
+            else
+            {
+                user += email[i];
+            }
+        }
+        
+        return user;
+    }
+
     public void create_account()
     {
         string email = emailField.text;
         string password = passwordField.text;
         string username = usernameField.text;
+        if (username.Length == 0)
+        {
+            username = get_username_from_email(email);
+        }
         bool is_username_valid = username.Length > 0;
         bool is_email_valid = authenticate_user.Validate_email(email);
         bool is_password_long = password.Length > 6;
@@ -69,7 +91,8 @@ public class create_user : MonoBehaviour
                 else
                 {
                     system_message.SetText("New Account created");
-                    user_id = task.Result.UserId;
+                    Debug.Log("Account created");
+                    //user_id = task.Result.UserId;
                     /*
                     Firebase.Auth.FirebaseUser user2 = auth.CurrentUser;
                     if (user2 != null)
@@ -131,23 +154,6 @@ public class create_user : MonoBehaviour
                 //databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
                 system_message.SetText("User is created");
             }
-            if (user_id != null)
-            {
-                //Create a node in the datbase about the user
-                DatabaseReference databse = FirebaseDatabase.DefaultInstance.RootReference;
-
-                Dictionary<string, string> created_user = new Dictionary<string, string>();
-                created_user.Add("username", username);
-                created_user.Add("email", email);
-                created_user.Add("score", "0");
-
-                Debug.Log(user.UserId);
-
-                databse.Child("users").Child(user_id).SetValueAsync(created_user);
-                //databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
-                system_message.SetText("User id is not null and is created");
-            }
-            
         }
     }
 
