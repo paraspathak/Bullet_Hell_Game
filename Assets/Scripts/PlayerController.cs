@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             //Slower but better shooting ship
-            speed = 10;
+            speed = 15;
             fireRate = 0.20f;
         }
     }
@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float x = Input.acceleration.x;
-        float z = Input.acceleration.y;
+        float x = Input.acceleration.x*3;
+        float z = Input.acceleration.y*3;
 
         Vector3 movement = new Vector3 (x, 0.0f, z);
 
