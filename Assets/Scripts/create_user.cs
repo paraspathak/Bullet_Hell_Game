@@ -93,9 +93,9 @@ public class create_user : MonoBehaviour
                     system_message.SetText("New Account created");
                     Debug.Log("Account created");
                     //user_id = task.Result.UserId;
-                    /*
-                    Firebase.Auth.FirebaseUser user2 = auth.CurrentUser;
-                    if (user2 != null)
+                    
+                    Firebase.Auth.FirebaseUser user3 = auth.CurrentUser;
+                    if (user3 != null)
                     {
                         //Create a node in the datbase about the user
                         DatabaseReference databse = FirebaseDatabase.DefaultInstance.RootReference.Child("users");
@@ -105,14 +105,16 @@ public class create_user : MonoBehaviour
                         created_user.Add("email", email);
                         created_user.Add("score", "0");
 
-                        Debug.Log(user2.UserId);
+                        Debug.Log(user3.UserId);
 
-                        databse.Child(user2.UserId).SetValueAsync(created_user);
+                        databse.Child(user3.UserId).SetValueAsync(created_user);
                         system_message.SetText("User is created");
                     }
-                    */
+                    
+                    
                 }
-                Firebase.Auth.FirebaseUser user2 = auth.CurrentUser;
+                /*
+                Firebase.Auth.FirebaseUser user2 = task.Result;
                 if (user2 != null)
                 {
                     //Create a node in the datbase about the user
@@ -128,7 +130,7 @@ public class create_user : MonoBehaviour
                     databse.Child(user2.UserId).SetValueAsync(created_user);
                     system_message.SetText("User is created");
                 }
-
+                */
                 // Firebase user has been created.
                 Firebase.Auth.FirebaseUser newUser = task.Result;
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
@@ -136,8 +138,9 @@ public class create_user : MonoBehaviour
                 
             });
 
-            //Get the current User
-            Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+            //auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => { });
+                //Get the current User
+                Firebase.Auth.FirebaseUser user = auth.CurrentUser;
             if (user != null)
             {
                 //Create a node in the datbase about the user
@@ -150,7 +153,7 @@ public class create_user : MonoBehaviour
 
                 Debug.Log(user.UserId);
 
-                databse.Child("users_attempt").Child(user.UserId).SetValueAsync(created_user);
+                databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
                 //databse.Child("users").Child(user.UserId).SetValueAsync(created_user);
                 system_message.SetText("User is created");
             }
