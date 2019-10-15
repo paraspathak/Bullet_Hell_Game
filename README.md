@@ -1,5 +1,13 @@
 # Bullet_Hell_Game
+name changed to:
+LAZERQUEST
+
+Official Demo website:
+https://paraspathak.github.io/Bullet_Hell_Game/
+
 Space Shooter Game with Firebase backend
+
+Instructions to contributors:
 
 Guide to forking: 
 https://guides.github.com/activities/forking/
